@@ -1,13 +1,20 @@
 package lv.venta.demo.model;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.ManyToAny;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -28,11 +35,6 @@ public class Child {
     @Setter(value=AccessLevel.NONE)
     private int id_ch;
     
-    @Column(name = "Allergies")
-    @Size(min = 3, max = 30)
-    @Pattern(regexp = "[A-Z]{1}[a-z]+", message="Must be first capital letter and others small")
-    private String allergies;
-    
     @Column(name = "Name")
     @Size(min = 3, max = 30)
     @Pattern(regexp = "[A-Z]{1}[a-z]+", message="Must be first capital letter and others small")
@@ -43,14 +45,26 @@ public class Child {
     @Pattern(regexp = "[A-Z]{1}[a-z]+", message="Must be first capital letter and others small")
     private String surname;
 
-    public Child(
-            @Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z]+", message = "Must be first capital letter and others small") String allergies,
-            @Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z]+", message = "Must be first capital letter and others small") String name,
-            @Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z]+", message = "Must be first capital letter and others small") String surname) {
+    @Column(name = "Allergies")
+    @Size(min = 3, max = 30)
+    @Pattern(regexp = "[A-Z]{1}[a-z]+", message="Must be first capital letter and others small")
+    private String allergies;
+
+    @OneToMany(mappedBy = "child")
+	@ToString.Exclude
+	private Collection<ChildRating> evaluation_rating;
+
+    @ManyToOne
+	@JoinColumn(name = "IdGr")
+    private ChildrenGroup group;
+
+    public Child(@Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z]+", message = "Must be first capital letter and others small") String name,
+            @Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z]+", message = "Must be first capital letter and others small") String surname,
+            @Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z]+", message = "Must be first capital letter and others small") String allergies) {
         super();
-        this.allergies = allergies;
         this.name = name;
         this.surname = surname;
+        this.allergies = allergies;
     }
 
     
