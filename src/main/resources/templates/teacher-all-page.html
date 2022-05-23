@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <p>Informacija par visiem skolotajiem--</p>
+        <table>
+            <tr th:each="teacher : ${package}">
+                <td th:text="${teacher.getName()}"></td>
+                <td th:text="${teacher.getUsername()}"></td>
+            </tr>
+        </table>
+    </body>
+</html>

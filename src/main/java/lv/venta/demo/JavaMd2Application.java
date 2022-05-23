@@ -44,5 +44,4 @@ public class JavaMd2Application {
 			}
 		};
 	}
-
 }
