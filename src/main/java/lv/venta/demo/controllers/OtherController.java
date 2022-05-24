@@ -51,7 +51,8 @@ public class OtherController {
 
     @GetMapping("/allergyOla") //localhost:8080/child/allergyOla
     public String getChildGroupByYear(Model model) {
-        model.addAttribute("package", otherService.selectAllChildByAllergiesOLA());
+        ArrayList<Child> filtredChilds = otherService.selectAllChildByAllergiesOLA();
+        model.addAttribute("package", filtredChilds);
         return "child-all-page";
     }
 
@@ -64,7 +65,7 @@ public class OtherController {
     public String postTeacherAdd(@PathVariable(name = "childid") int childid, @Valid ChildRating childRating, BindingResult result) { 
         if(!result.hasErrors()) {
             otherService.insertChildRatingByChildId(childid, childRating);
-            return "redirect:/teacher/showAll/" + childRating.getIdRat();
+            return "redirect:/teacher/showAll/" + childRating.getId_rat();
         } else {
             return "teacher-add-page";  
         }

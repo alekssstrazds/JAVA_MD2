@@ -61,7 +61,7 @@ public class TeacherCRUDController {
     public String postTeacherAdd(@Valid Teacher teacher, BindingResult result) { 
         if(!result.hasErrors()) {
             teacherService.insertNewTeacher(teacher);
-            return "redirect:/teacher/showAll/" + teacher.getIdTe();
+            return "redirect:/teacher/showAll/" + teacher.getId_te();
         } else {
             return "teacher-add-page";  
         }

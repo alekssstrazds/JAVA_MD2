@@ -6,4 +6,5 @@ import lv.venta.demo.model.ChildrenGroup;
 
 public interface IChildrenGroupRepo extends CrudRepository<ChildrenGroup,Integer> {
 
+    boolean existsByGroupYear(int groupYear);
 }

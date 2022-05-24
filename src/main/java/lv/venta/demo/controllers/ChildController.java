@@ -55,7 +55,7 @@ public class ChildController {
     public String postTeacherAdd(@PathVariable(name="groupid") int groupid, @Valid Child child, BindingResult result) { 
         if(!result.hasErrors()) {
             childService.insertNewChild(groupid, child);
-            return "redirect:/child/showAll/" + groupid.getIdGr(); //TODO Lombok nestrada
+            return "redirect:/child/showAll/" + child.getId_ch();
         } else {
             return "child-add-page";  
         }

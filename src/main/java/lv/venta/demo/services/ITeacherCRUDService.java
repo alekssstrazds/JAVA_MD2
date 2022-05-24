@@ -11,9 +11,9 @@ public interface ITeacherCRUDService {
     //read all
     public abstract ArrayList<Teacher> getAllTeachers();
     //read by id
-    public abstract Teacher getTeacherById(int id);
+    public abstract Teacher getTeacherById(int id) throws Exception;
     //update
-    public abstract void updateTeacherById(int id, Teacher temp);
+    public abstract void updateTeacherById(int id, Teacher temp) throws Exception;
     //delete
-    public abstract void  deleteTeacherById(int id);
+    public abstract void  deleteTeacherById(int id) throws Exception;
 }

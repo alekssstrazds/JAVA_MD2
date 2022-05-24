@@ -51,6 +51,11 @@ public class ChildrenGroup {
 	@ToString.Exclude
 	private Collection<Child> children;
 	
+	public void addNewChild(Child child)
+	{
+		children.add(child);
+	}
+
 	public ChildrenGroup(String title, int year) {
 		this.title = title;
 		this.year = year;
