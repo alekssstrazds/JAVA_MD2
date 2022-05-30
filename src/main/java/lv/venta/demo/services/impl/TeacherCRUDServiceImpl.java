@@ -17,9 +17,7 @@ public abstract class TeacherCRUDServiceImpl implements ITeacherCRUDService {
     @Override
     public Teacher insertNewTeacher(Teacher temp) {
         Teacher newTeacher = new Teacher(temp.getName(),temp.getSurname());
-        //saglabājam izveidoto produktu DB
         Teacher teacherFromDB = teacherRepo.save(newTeacher);
-        //atgriežam
         return teacherFromDB;
     }
     @Override
@@ -37,16 +35,13 @@ public abstract class TeacherCRUDServiceImpl implements ITeacherCRUDService {
     public void updateTeacherById(int id, Teacher temp) throws Exception{
         if(teacherRepo.existsById(id)) 
         {
-            //iegūstam produktu no DB
             Teacher teacher = teacherRepo.findById(id).get();
-            //rediģējam produktu
             if(!teacher.getName().equals(temp.getName())) {
                 teacher.setName(temp.getName()); 
             }
             if(teacher.getSurname().equals(temp.getSurname())) {
                 teacher.setSurname(temp.getSurname());
             }
-            //saglabājam DB
             teacherRepo.save(teacher);
         } throw new Exception("Id nav atrasts!!!");
     }

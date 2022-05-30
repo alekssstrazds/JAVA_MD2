@@ -54,17 +54,17 @@ public class OtherController {
     }
 
     @GetMapping("/rating/addNew/{childid}") //localhost:8080/child/addNew/{childid}
-    public String getTeacherAdd(@PathVariable(name = "childid") int childid, ChildRating temp)  {   
-        return "teacher-add-page";
+    public String getChildAdd(@PathVariable(name = "childid") int childid, ChildRating temp)  {   
+        return "child-add-page";
     }
 
     @PostMapping("/rating/addNew/{childid}") //localhost:8080/child/addNew/{childid}
-    public String postTeacherAdd(@PathVariable(name = "childid") int childid, @Valid ChildRating childRating, BindingResult result) { 
+    public String postChildAdd(@PathVariable(name = "childid") int childid, @Valid ChildRating childRating, BindingResult result) { 
         if(!result.hasErrors()) {
             otherService.insertChildRatingByChildId(childid, childRating);
-            return "redirect:/teacher/showAll/" + childRating.getId_rat();
+            return "redirect:/child/showAll/" + childRating.getId_rat();
         } else {
-            return "teacher-add-page";  
+            return "child-add-page";  
         }
     }
 }

@@ -19,14 +19,13 @@ public abstract class ChildServiceImpl implements IChildService{
     @Autowired
     private IChildrenGroupRepo childGroupRepo;
     
-    //atgriež visus bērnus, kas ir grupiņā, ja ir zināms grupiņas id
     @Override
     public ArrayList<Child> selectAllChildInGroupByGroupId(int id) throws Exception {
         if(childGroupRepo.existsById(id) && childGroupRepo.findById(id).get().equals(id)) {
             return (ArrayList<Child>) childRepo.findAll();
         } throw new Exception("Id nav atrasts!!!"); 
     }
-    //izdzēš bērnu no grupiņas, ja ir zināms grupiņas id un bērna id
+ 
     @Override
     public void deleteChildByIdFromGroupById(int groupId, int childId) throws Exception {
         boolean isFound = false;
@@ -38,30 +37,26 @@ public abstract class ChildServiceImpl implements IChildService{
             throw new Exception("Id nav atrasts!!!");
         } 
     }
-    //pievieno jaunu bērnu sistēmā un to pievieno grupiņai, ja ir zināms grupiņas id
+  
     @Override
     public Child insertNewChild(int id, Child temp) {
         Child newChild = new Child(temp.getName(),temp.getSurname(), temp.getAllergies());
-        //saglabājam izveidoto produktu DB
+        ChildrenGroup group = childGroupRepo.findById(id).get();
         Child childFromDB = childRepo.save(newChild);
         if(childGroupRepo.existsById(id)) { //TODO japievieno child pie grupas
-            
+        	group.addNewChild(newChild);
         }
-
-        //atgriežam
         return childFromDB;
     }
-
-    // nomaina esošā bērna grupiņu uz jaunu, ja ir zināms jaunās grupiņas id
+    
     @Override
     public void changeChildByIdGroupById(int childId, int groupId) throws Exception {
         if(childGroupRepo.existsById(groupId)) 
         {
-            //iegūstam produktu no DB
             Child child = childRepo.findById(childId).get();
             ChildrenGroup group = childGroupRepo.findById(groupId).get();
             deleteChildByIdFromGroupById(childId, child.getGroup().getId_gr());
-            //Mainam objektu uz citu grupi'nu
+            
             if(childGroupRepo.existsById(groupId)) { 
                 group.addNewChild(child);
             }

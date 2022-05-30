@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import lv.venta.demo.model.Teacher;
 
 public interface ITeacherCRUDService {
-    
     //create
     public Teacher insertNewTeacher(Teacher temp);
     //read all

@@ -49,7 +49,6 @@ public class TeacherCRUDController {
             model.addAttribute("package", temp);
             return "product-one-page"; //parāda teacher-one-page.html lapu ar package
         } catch (Exception e) {
-            //e.printStackTrace();
             model.addAttribute("errorMsg", e.getMessage());
             return "error-page"; //atvērs error-page.html lapu
         }
@@ -80,6 +79,7 @@ public class TeacherCRUDController {
             return "teacher-add-page";  
         }
     }
+    
     @GetMapping("/update/{id}") //localhost:8080/teacher/update/id
     public String getTeacherUpdate(@PathVariable(name="id") int id, Model model) {
         try {
@@ -91,7 +91,7 @@ public class TeacherCRUDController {
             return "error-page"; //atvērs error-page.html lapu
         }
     }
-
+    
     @PostMapping("update/{id}") //localhost:8080/teacher/update/id
     public String getTeacherUpdate(@PathVariable(name="id") int id, @Valid Teacher teacher, BindingResult result) { 
         if(!result.hasErrors()) {

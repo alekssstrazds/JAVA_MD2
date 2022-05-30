@@ -24,7 +24,7 @@ public class JavaMd2Application {
 	public static void main(String[] args) {
 		SpringApplication.run(JavaMd2Application.class, args);
 	}
-	@Bean //visur, kur šī annotācija, tiks izsukts automātiski
+	@Bean
 	public CommandLineRunner testdb(IChildRatingRepo ratingRepo, IChildRepo childRepo, IChildrenGroupRepo groupRepo, ITeacherRepo teacherRepo) {
 		return new CommandLineRunner() {
 			@Override
