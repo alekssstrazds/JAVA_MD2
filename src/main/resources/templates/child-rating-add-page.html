@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <p>Ludzu ievadiet jaunu bernu:</p>
+        <form action="#" th:action="@{/rating/addNew/__${id}__}" th:object="${childRating}" method="post">
+        <table>
+            <tr>
+                <td> Ievadīt vērtēšanas aprakstu:</td>
+                <td> <input type="text" th:field="*{evaluation_title}"></td>
+                <td th:if="${#fields.hasErrors('evaluation_title')}" th:errors="*{evaluation_title}">Name Error</td>
+            </tr>
+
+            <tr>
+                <td> Ievadīt vertējumu:</td>
+                <td> <input type="text" th:field="*{value}"></td>
+                <td th:if="${#fields.hasErrors('value')}" th:errors="*{value}">Name Error</td>
+            </tr>
+
+            <tr>
+                <td> Ievadīt novērtējumu:</td>
+                <td> <input type="text" th:field="*{degree}"></td>
+                <td th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}">Name Error</td>
+            </tr>
+            
+        </table>
+            <button type="submit">Saglabāt bernu grupa</button>
+        </form>
+    </body>
+</html>

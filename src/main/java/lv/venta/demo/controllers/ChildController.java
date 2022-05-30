@@ -47,12 +47,12 @@ public class ChildController {
     }
 
     @GetMapping("/addNew/{groupid}") //localhost:8080/child/addNew/1
-    public String getTeacherAdd(@PathVariable(name="groupid") int groupid, Child temp) {   
+    public String getChildAdd(@PathVariable(name="groupid") int groupid, Child temp) {   
         return "child-add-page";
     }
 
     @PostMapping("/addNew/{groupid}") //localhost:8080/child/addNew/1
-    public String postTeacherAdd(@PathVariable(name="groupid") int groupid, @Valid Child child, BindingResult result) { 
+    public String postChildAdd(@PathVariable(name="groupid") int groupid, @Valid Child child, BindingResult result) { 
         if(!result.hasErrors()) {
             childService.insertNewChild(groupid, child);
             return "redirect:/child/showAll/" + child.getId_ch();
@@ -61,8 +61,13 @@ public class ChildController {
         }
     }
 
-    @GetMapping("/changeGroup/{childId}/{newGroupId}") //localhost:8080/child/addNew/1
-    public String getTeacherAdd(@PathVariable(name="childId") int childId, @PathVariable(name="newGroupId") int newGroupId, Child temp) {   
-        return "child-all-page";
+    @GetMapping("/changeGroup/{childId}/{groupId}") //localhost:8080/child/addNew/1
+    public String changeChildGroup(@PathVariable(name="groupId") int groupId, @PathVariable(name="childId") int childId , @Valid Child child, BindingResult result) throws Exception {   
+        if(!result.hasErrors()) {
+            childService.changeChildByIdGroupById(childId, groupId);
+            return "redirect:/child/showAll/" + child.getId_ch();
+        } else {
+            return "child-add-page";
+        }
     }
 }

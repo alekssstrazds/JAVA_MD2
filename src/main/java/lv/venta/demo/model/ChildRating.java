@@ -47,9 +47,10 @@ public class ChildRating {
 	@JoinColumn(name = "IdCh")
     private Child child;
 
-    public ChildRating(String evaluation_title, int value) {
+    public ChildRating(String evaluation_title, int value, RatingValue degree) {
         super();
         this.evaluation_title = evaluation_title;
         this.value = value;
+        this.degree = degree;
     }
 }

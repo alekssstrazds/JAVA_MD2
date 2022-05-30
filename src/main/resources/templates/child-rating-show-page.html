@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <p>Informacija par produktu sarakstu--</p>
+        <table>
+            <tr th:each="childRating : ${package}">
+                <td th:text="${childRating.getEvaluation_title()}"></td>
+                <td th:text="${childRating.getValue()}"></td>
+                <td th:text="${childRating.getDegree()}"></td>
+            </tr>
+        </table>
+    </body>
+</html>

@@ -5,6 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import lv.venta.demo.model.ChildrenGroup;
 
 public interface IChildrenGroupRepo extends CrudRepository<ChildrenGroup,Integer> {
-
-    boolean existsByGroupYear(int groupYear);
+	public boolean existsByGroupYear(int groupYear);
 }

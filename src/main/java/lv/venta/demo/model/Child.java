@@ -56,9 +56,7 @@ public class Child {
 	@JoinColumn(name = "IdGr")
     private ChildrenGroup group;
 
-    public Child(@Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z]+", message = "Must be first capital letter and others small") String name,
-            @Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z]+", message = "Must be first capital letter and others small") String surname,
-            @Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z]+", message = "Must be first capital letter and others small") String allergies) {
+    public Child(String name, String surname, String allergies) {
         super();
         this.name = name;
         this.surname = surname;

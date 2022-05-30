@@ -43,11 +43,9 @@ public class Teacher {
 
     @OneToMany(mappedBy = "teacher")
 	@ToString.Exclude
-	private Collection<ChildrenGroup> group;
+	private Collection<ChildrenGroup> teGroup;
 
-    public Teacher(
-            @Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z]+", message = "Must be first capital letter and others small") String name,
-            @Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z]+", message = "Must be first capital letter and others small") String surname) {
+    public Teacher(String name, String surname) {
         super();
         this.name = name;
         this.surname = surname;

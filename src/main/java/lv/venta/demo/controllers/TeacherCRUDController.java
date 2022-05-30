@@ -6,12 +6,14 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lv.venta.demo.model.Teacher;
 import lv.venta.demo.services.ITeacherCRUDService;
@@ -40,8 +42,20 @@ public class TeacherCRUDController {
             return "error-page"; //atvērs error-page.html lapu
         }
     }
+    @GetMapping("/one") //localhost:8080/teacher/one?id=0
+    public String getTeacherOne(@RequestParam(name="id") int id, Model model){
+        try {
+            Teacher temp = teacherService.readTeacherById(id);
+            model.addAttribute("package", temp);
+            return "product-one-page"; //parāda teacher-one-page.html lapu ar package
+        } catch (Exception e) {
+            //e.printStackTrace();
+            model.addAttribute("errorMsg", e.getMessage());
+            return "error-page"; //atvērs error-page.html lapu
+        }
+    }
     @GetMapping("/remove/{id}") //localhost:8080/teacher/remove/1
-    public String getProductDelete(@PathVariable(name="id") int id, Model model) {
+    public String getTeacherDelete(@PathVariable(name="id") int id, Model model) {
         try {
             teacherService.deleteTeacherById(id);
             model.addAttribute("package", teacherService.getAllTeachers());
@@ -79,7 +93,7 @@ public class TeacherCRUDController {
     }
 
     @PostMapping("update/{id}") //localhost:8080/teacher/update/id
-    public String getProductUpdaet(@PathVariable(name="id") int id, @Valid Teacher teacher, BindingResult result) { 
+    public String getTeacherUpdate(@PathVariable(name="id") int id, @Valid Teacher teacher, BindingResult result) { 
         if(!result.hasErrors()) {
             try {
                 teacherService.updateTeacherById(id, teacher);

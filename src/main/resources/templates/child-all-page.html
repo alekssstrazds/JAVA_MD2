@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <p>Informacija par bernu sarakstu--</p>
+        <table>
+            <tr th:each="child : ${package}">
+                <td th:text="${child.getName()}"></td>
+                <td th:text="${child.getSurname()}"></td>
+                <td th:text="${child.getAllergies()}"></td>
+            </tr>
+        </table>
+    </body>
+</html>

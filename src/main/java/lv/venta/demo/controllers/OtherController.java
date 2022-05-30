@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import javax.validation.Valid;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lv.venta.demo.model.Child;
 import lv.venta.demo.model.ChildRating;
-import lv.venta.demo.model.ChildrenGroup;
 import lv.venta.demo.services.IOtherService;
 
 @Controller
@@ -27,7 +24,7 @@ public class OtherController {
     private IOtherService otherService;
 
     @GetMapping("/rating/{childid}") //localhost:8080/child/rating/1
-    public String getRatingByChildId(@PathVariable(name = "childid") int childid, Model model) {
+    public String getRatingByChildId(@PathVariable(name = "childid") int childid, Model model) throws Exception {
         
         ArrayList<ChildRating> allRatings = otherService.selectAllRatingsByChildId(childid);
         model.addAttribute("package", allRatings);
@@ -43,8 +40,8 @@ public class OtherController {
     }
 
     @GetMapping("/group/{year}") //localhost:8080/child/group/{year}
-    public String getChildGroupByYear(@PathVariable(name = "year") int year, Model model) {
-        ArrayList<ChildrenGroup> allChildrens = otherService.selectAllChildByGroupYear(year);
+    public String getChildGroupByYear(@PathVariable(name = "year") int year, Model model) throws Exception {
+        ArrayList<Child> allChildrens = otherService.selectAllChildByGroupYear(year);
         model.addAttribute("package", allChildrens);
         return "child-all-page";
     }

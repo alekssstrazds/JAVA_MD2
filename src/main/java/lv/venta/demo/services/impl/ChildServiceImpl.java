@@ -2,8 +2,6 @@ package lv.venta.demo.services.impl;
 
 import java.util.ArrayList;
 
-import javax.swing.GroupLayout.Group;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +18,7 @@ public abstract class ChildServiceImpl implements IChildService{
 
     @Autowired
     private IChildrenGroupRepo childGroupRepo;
+    
     //atgriež visus bērnus, kas ir grupiņā, ja ir zināms grupiņas id
     @Override
     public ArrayList<Child> selectAllChildInGroupByGroupId(int id) throws Exception {
